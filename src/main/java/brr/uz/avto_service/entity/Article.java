@@ -1,0 +1,44 @@
+package brr.uz.avto_service.entity;
+
+import brr.uz.avto_service.entity.template.AbsEntity;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToMany;
+import java.util.Date;
+import java.util.List;
+
+@EqualsAndHashCode(callSuper = true)
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Entity
+public class Article extends AbsEntity {
+
+    private String titleUz;
+
+    private String titleRu;
+
+    private String textUz;
+
+    private String textRu;
+
+    @Column(unique = true,
+            nullable = false,
+            columnDefinition = "text")
+    private String url;
+
+    @Column(nullable = false)
+    private Date date;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    private List<Attachment> photoList;
+
+
+
+}
