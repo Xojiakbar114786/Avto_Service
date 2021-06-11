@@ -15,7 +15,9 @@ import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
+
+
+import java.io.*;
 
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
     @Autowired
@@ -24,9 +26,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     @Autowired
     private JwtTokenProvider tokenProvider;
 
-
     private static final Logger logger = LoggerFactory.getLogger(JwtAuthenticationFilter.class);
-
 
     @Override
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {

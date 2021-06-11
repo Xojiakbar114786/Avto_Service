@@ -10,50 +10,47 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+import java.util.*;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
 
 @Component
 public class DataLoader implements CommandLineRunner {
 
-    @Autowired
+    private final
     UsersRepository usersRepository;
 
-    @Autowired
+    private final
     PasswordEncoder passwordEncoder;
 
-    @Autowired
+    private final
     RoleRepository roleRepository;
 
 
-    @Value("${spring.datasource.initialization-mode}")
-    private String addSuperAdmin;
+    @Value("${spring.sql.init.enabled}")
+    private boolean addSuperAdmin;
+
+    public DataLoader(UsersRepository usersRepository, PasswordEncoder passwordEncoder, RoleRepository roleRepository) {
+        this.usersRepository = usersRepository;
+        this.passwordEncoder = passwordEncoder;
+        this.roleRepository = roleRepository;
+    }
+
 
     @Override
-    public void run(String... args) throws Exception{
-        if (addSuperAdmin.equals("always")) {
+    public void run(String... args) throws Exception {
+        if (addSuperAdmin) {
             Role byRoleName = roleRepository.findByRoleName(RoleName.ROLE_SUPER_ADMIN);
             Set<Role> role = new HashSet<>(Arrays.asList(byRoleName));
-            Users users = new Users(
-                   "Xojiakbar",
+            Users user = new Users(
+                    "Xojiakbar",
                     "Raxmatov",
-                    "+998994503114",
-                    passwordEncoder.encode("qwert456"),
-                    22.139021330134582,
-                    39.96507856579298,
-                    null,
-                    null,
-                    0,
-                    false,
-                    role,
-                    true,
-                    true,
-                    true,
-                    true
+                    "++998999999999",
+                    passwordEncoder.encode("1234"),
+                    41.27353496221772F,
+                    69.22578938864957F,
+                    role
             );
-            usersRepository.save(users);
+            usersRepository.save(user);
         }
     }
 }
