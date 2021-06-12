@@ -23,10 +23,10 @@ public class Company extends AbsEntity {
     private Users users;
 
     @Column(nullable = false)
-    private Float lan;
+    private Double lan;
 
     @Column(nullable = false)
-    private Float lat;
+    private Double lat;
 
     @ManyToMany(fetch = FetchType.LAZY)
     private List<Attachment> licencePhotoList;
@@ -34,10 +34,17 @@ public class Company extends AbsEntity {
     @ManyToMany(fetch = FetchType.LAZY)
     private List<Attachment> PhotoList;
 
-    @Column(nullable = false)
     private String phoneNumber;
 
-    @Column(nullable = false)
+    public Company(String name, Users users, Double lan, Double lat, String phoneNumber, boolean active) {
+        this.name = name;
+        this.users = users;
+        this.lan = lan;
+        this.lat = lat;
+        this.phoneNumber = phoneNumber;
+        this.active = active;
+    }
+
     private String homePhoneNumber;
 
     private String descriptionUz;

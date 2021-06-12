@@ -5,7 +5,6 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.LastModifiedBy;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
@@ -16,22 +15,21 @@ import java.sql.Timestamp;
 //@EntityListeners({AuditingEntityListener.class})
 public abstract class AbsEntity implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    //    @DiffIgnore
+    @OrderBy
     @CreationTimestamp
-//    @Column(nullable = false, updatable = false)
+    @Column(nullable = false, updatable = false)
     private Timestamp createdAt;
 
-    //    @DiffIgnore
     @UpdateTimestamp
-//    @Column(nullable = false)
+    @Column(nullable = false)
     private Timestamp updatedAt;
 
     @CreatedBy
+    @Column(updatable = false)
     private Long createdBy;
 
-    @LastModifiedBy
-    private Long updatedBy;
+    @LastModifiedBy private Long updatedBy;
 }

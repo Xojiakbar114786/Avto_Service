@@ -19,24 +19,21 @@ public class Users extends AbsEntity implements UserDetails {
     @Column(nullable = false)
     private String firstName;
 
-    @Column(nullable = false)
     private String lastName;
 
     @Column(nullable = false)
     private String phoneNumber;
 
-    @Column(nullable = false)
     private String password;
 
-    private Float lat;
+    private Double lat;
 
-    private Float lan;
+    private Double lan;
 
     private String descriptionUz;
 
     private String descriptionRu;
 
-    @Column(nullable = false)
     private long orderCount;
 
     private boolean deleted = false;
@@ -45,10 +42,10 @@ public class Users extends AbsEntity implements UserDetails {
     @JoinTable(name = "user_role",
             joinColumns = {@JoinColumn(name = "user_id")},
             inverseJoinColumns = {@JoinColumn(name = "role_id")})
-    private Set<Role> roles;
+    private List<Role> roles;
 
 
-    public Users(String firstName, String lastName, String phoneNumber, String password, Float lat, Float lan, Set<Role> roles) {
+    public Users(String firstName, String lastName, String phoneNumber, String password, Double lat, Double lan, List<Role> roles) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;

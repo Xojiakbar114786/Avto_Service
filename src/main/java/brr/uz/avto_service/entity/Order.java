@@ -17,9 +17,6 @@ import java.util.Date;
 @Table(name = "orders")
 public class Order extends AbsEntity {
 
-    @Column(nullable = false)
-    private String orderNumber;
-
     @ManyToOne(fetch = FetchType.LAZY)
     private Users users;
 
@@ -36,16 +33,27 @@ public class Order extends AbsEntity {
     private Operator operator;
 
     @Column(nullable = false)
-    private Float lat;
+    private Double lat;
 
     @Column(nullable = false)
-    private Float lan;
+    private Double lan;
 
     @Column(nullable = false)
     private Date date;
 
     @Column(nullable = false)
     private String descriptionUz;
+
+    public Order(Company company, ServiceItem serviceItem, Double lat, Double lan, String clientName) {
+        this.company = company;
+        this.serviceItem = serviceItem;
+        this.lat = lat;
+        this.lan = lan;
+        this.clientName = clientName;
+    }
+
+    @Column(nullable = false)
+    private String clientName;
 
     @Column(nullable = false)
     private String descriptionRu;
