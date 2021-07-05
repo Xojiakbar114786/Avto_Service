@@ -11,6 +11,7 @@ import java.util.Optional;
 
 @Repository
 public interface UsersRepository extends JpaRepository<Users, Long> {
+
     @Query(nativeQuery = true, value = "SELECT * FROM users WHERE deleted=false AND id IN (SELECT user_id FROM user_role WHERE role_id = (SELECT id FROM role WHERE role_name = :roleName))")
     Page<Users> findAllByRole(Pageable pageable, String roleName);
 

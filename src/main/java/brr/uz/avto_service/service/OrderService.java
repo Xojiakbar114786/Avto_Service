@@ -4,6 +4,7 @@ import brr.uz.avto_service.entity.Company;
 import brr.uz.avto_service.entity.Order;
 import brr.uz.avto_service.entity.ServiceItem;
 import brr.uz.avto_service.payload.ApiResponse;
+import brr.uz.avto_service.payload.OrderReq;
 import brr.uz.avto_service.repository.CompanyRepository;
 import brr.uz.avto_service.repository.OrderRepository;
 import brr.uz.avto_service.repository.ServiceItemRepository;
@@ -28,15 +29,15 @@ public class OrderService {
 
 
 
-    public ApiResponse orderCreate(Long id, String name, Double lan, Double lat, Long companyId, String phoneNumber,Long serviceItem) {
+    public ApiResponse orderCreate(OrderReq orderReq) {
         try {
-            Company companyId1 = findCompanyId(id);
+            Company companyId1 = findCompanyId(orderReq.getCompanyId());
 
-            ServiceItem byServiceItem = findByServiceItem(id);
+            ServiceItem byServiceItem = findByServiceItem(orderReq.getServiceItem());
 
-            if (phoneNumber.isEmpty()) {
+            if (orderReq.getPhoneNumber().isEmpty()) {
                 return new ApiResponse("you must enter your phone number", false, null);
-            } else if (lan==null || lat==null) {
+            } else if (orderReq.getLan()==null || orderReq.getLat()==null) {
                 return new ApiResponse("location error", false, null);
 
             } else if (companyId1 != null && byServiceItem != null) {
@@ -48,21 +49,21 @@ public class OrderService {
                                 Order(
                                 companyId1,
                                 byServiceItem,
-                                        lan,
-                                        lat,
-                                        name
+                                orderReq.getLan(),
+                                orderReq.getLat(),
+                                orderReq.getName(),
+                                orderReq.getPhoneNumber()
 
                         )));
             }else {
-                return new ApiResponse("there is no such company or service",false,null);
+                return new ApiResponse("there is no such company or service",
+                        false,
+                        null);
             }
-
         } catch (Exception e) {
-            return new ApiResponse(e.getMessage(), false);
+            return new ApiResponse(e.getMessage(),false);
         }
     }
-
-
 
 
     private Company findCompanyId(Long id){
@@ -74,9 +75,6 @@ public class OrderService {
         }
     }
 
-
-
-
     private ServiceItem findByServiceItem(Long id){
         Optional<ServiceItem> serviceItemById = serviceItemRepository.findById(id);
         if (serviceItemById.isPresent()){
@@ -85,7 +83,6 @@ public class OrderService {
             return null;
         }
     }
-
 
 
 }

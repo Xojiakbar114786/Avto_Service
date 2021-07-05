@@ -9,6 +9,7 @@ import brr.uz.avto_service.repository.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
@@ -35,6 +36,9 @@ public class DataLoader implements CommandLineRunner {
 
 
 
+//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+//        auth.authenticationProvider(new MyCustomAuthProvider());
+//    }
 
     @Override
     public void run(String... args)  {
@@ -53,8 +57,8 @@ public class DataLoader implements CommandLineRunner {
                     "Raxmatov",
                     "+998999999999",
                     passwordEncoder.encode("1234"),
-                    41.27353496221772,
                     69.22578938864957,
+                    41.27353496221772,
                     roleRepository.findByRoleName(RoleName.ROLE_USER)
             ));
             for (double i = 0; i < 10; i=i+0.009) {

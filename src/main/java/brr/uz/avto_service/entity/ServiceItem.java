@@ -29,8 +29,6 @@ public class ServiceItem extends AbsNameEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     private Services services;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private CarCategory carCategory;
 
     private Date startTime;
 

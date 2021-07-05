@@ -44,17 +44,23 @@ public class Order extends AbsEntity {
     @Column(nullable = false)
     private String descriptionUz;
 
-    public Order(Company company, ServiceItem serviceItem, Double lat, Double lan, String clientName) {
-        this.company = company;
-        this.serviceItem = serviceItem;
-        this.lat = lat;
-        this.lan = lan;
-        this.clientName = clientName;
-    }
+    @Column(nullable = false)
+    private String phoneNumber;
 
     @Column(nullable = false)
     private String clientName;
 
     @Column(nullable = false)
     private String descriptionRu;
+
+    public Order(Company company, ServiceItem serviceItem, Double lat, Double lan, String clientName,String phoneNumber) {
+        this.company = company;
+        this.serviceItem = serviceItem;
+        this.lat = lat;
+        this.lan = lan;
+        this.clientName = clientName;
+        this.phoneNumber=phoneNumber;
+    }
+
+
 }

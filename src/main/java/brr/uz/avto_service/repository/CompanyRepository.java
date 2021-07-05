@@ -18,5 +18,7 @@ public interface CompanyRepository extends JpaRepository<Company, Long> {
 
     List<LocationCollection> findByActiveAndLanBetweenAndLatBetween(boolean active, Double lan, Double lan2, Double lat, Double lat2);
 
-    Optional<Company> findById(Long id);
+    boolean existsByActiveAndId(boolean active, Long id);
+
+    Object delete(Long id);
 }

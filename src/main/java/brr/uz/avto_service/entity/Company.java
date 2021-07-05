@@ -20,7 +20,7 @@ public class Company extends AbsEntity {
     private String name;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    private Users users;
+    private Users users; //  kompaniyani egasi
 
     @Column(nullable = false)
     private Double lan;
@@ -36,15 +36,6 @@ public class Company extends AbsEntity {
 
     private String phoneNumber;
 
-    public Company(String name, Users users, Double lan, Double lat, String phoneNumber, boolean active) {
-        this.name = name;
-        this.users = users;
-        this.lan = lan;
-        this.lat = lat;
-        this.phoneNumber = phoneNumber;
-        this.active = active;
-    }
-
     private String homePhoneNumber;
 
     private String descriptionUz;
@@ -58,5 +49,25 @@ public class Company extends AbsEntity {
     private Double money;
 
     private Long orderCount;
+
+    public Company(String name, Users users, Double lan, Double lat, String phoneNumber, boolean active) {
+        this.name = name;
+        this.users = users;
+        this.lan = lan;
+        this.lat = lat;
+        this.phoneNumber = phoneNumber;
+        this.active = active;
+    }
+
+    public Company(String name, Users users, Double lan, Double lat, String phoneNumber, String homePhoneNumber, String descriptionUz, String descriptionRu) {
+        this.name = name;
+        this.users = users;
+        this.lan = lan;
+        this.lat = lat;
+        this.phoneNumber = phoneNumber;
+        this.homePhoneNumber = homePhoneNumber;
+        this.descriptionUz = descriptionUz;
+        this.descriptionRu = descriptionRu;
+    }
 
 }

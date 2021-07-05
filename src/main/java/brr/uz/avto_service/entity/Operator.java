@@ -28,7 +28,7 @@ public class Operator extends AbsEntity{
     private Date endTime;
 
     private Long answerOrderCount;
-//
+
     private Long likes;
 
     private Long disLike;
